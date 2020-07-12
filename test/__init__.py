@@ -40,3 +40,16 @@ def multiply(
         return a * b
     else:
         return (a * b) % mod
+
+
+def func(x, y, *args, **kwargs):
+    """ test function
+
+    Parameters
+    ----------
+    x, y : array-like
+        parameters
+    *args, **kwargs
+        variable args list and arbitrary keywords
+    """
+    pass
