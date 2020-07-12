@@ -15,6 +15,10 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
 print("modified path:", sys.path)
 
+import test
+
+print(test)
+
 # -- Project information -----------------------------------------------------
 
 project = 'Test'
