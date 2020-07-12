@@ -18,13 +18,13 @@ def multiply(
 
     Parameters
     ----------
-    a : numpy.ndarray
+    a : array-like
         first factor
     b
         second factor
     *variables : str
         parameters without use
-    mod : numpy.array, optional
+    mod : array-like, optional
         optionally compute the modulo of the product
     files : list of str or list of os.PathLike or dict-like
         save each value of the results into a new file
