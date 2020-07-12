@@ -8,3 +8,4 @@ API
    :toctree: generated/
 
    multiply
+   func
