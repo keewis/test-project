@@ -1,2 +1,2 @@
-sphinx
+git+https://github.com/sphinx-doc/sphinx.git@refs/pull/7799/merge
 numpy
