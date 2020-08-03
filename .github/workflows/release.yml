@@ -46,6 +46,6 @@ jobs:
           # `upload_url`. See this blog post for more info:
           # https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/test_project-${{ github.ref }}.tar.gz
-          asset_name: test_project-${{ github.ref }}.zip
-          asset_content_type: application/
+          asset_path: dist/test_project-$RELEASE_VERSION.tar.gz
+          asset_name: test_project-$RELEASE_VERSION.tar.gz
+          asset_content_type: application/gzip
