@@ -1,6 +1,9 @@
 from typing import TypeVar, Dict, DefaultDict
+from importlib.metadata import version
 
 import numpy as np
+
+__version__ = version("test_project")
 
 T_DSorDA = TypeVar("T_DSorDA", Dict, DefaultDict)
 
