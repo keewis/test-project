@@ -24,7 +24,7 @@ jobs:
         run: |
           python -m pep517.build --source --binary .
       - name: set env
-        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:11})
       - name: create release
         id: create_release
         uses: actions/create-release@v1
