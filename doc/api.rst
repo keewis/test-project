@@ -9,3 +9,7 @@ API
 
    multiply
    func
+   func2
+
+   MyClass.method1
+   MyClass.method2
