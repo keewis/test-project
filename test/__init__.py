@@ -3,7 +3,10 @@ from importlib.metadata import version
 
 import numpy as np
 
-__version__ = version("test_project")
+try:
+    __version__ = version("test_project")
+except Exception:
+    __version__ = "999"
 
 T_DSorDA = TypeVar("T_DSorDA", Dict, DefaultDict)
 
