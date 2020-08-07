@@ -73,6 +73,7 @@ napoleon_type_aliases = {
     "dict-like": ":term:`dict-like <mapping>`",
     "array-like": ":term:`array-like <array_like>`",
     "array_like": ":term:`array_like`",
+    "DataFrame.sum": "pandas.DataFrame.sum",
 }
 
 intersphinx_mapping = {
