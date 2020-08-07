@@ -67,8 +67,8 @@ html_static_path = ['_static']
 autosummary_generate = True
 autodoc_typehints = "none"
 
-napoleon_use_param = True
-napoleon_use_rtype = True
+napoleon_use_param = False
+napoleon_use_rtype = False
 napoleon_type_aliases = {
     "dict-like": ":term:`dict-like <mapping>`",
     "array-like": ":term:`array-like <array_like>`",
