@@ -1,3 +1,2 @@
-# git+https://github.com/sphinx-doc/sphinx.git@refs/pull/7799/merge
-git+https://github.com/sphinx-doc/sphinx.git@refs/pull/7690/merge
+git+https://github.com/keewis/sphinx.git@integration#egg=sphinx
 numpy
