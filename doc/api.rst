@@ -13,3 +13,6 @@ API
 
    MyClass.method1
    MyClass.method2
+
+   lock
+   dump_model

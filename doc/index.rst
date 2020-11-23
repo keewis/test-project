@@ -19,7 +19,11 @@ See :doc:`api`.
 
    api
 
-The only function available right now is :py:func:`~test.multiply`            
+The only function available right now is :py:func:`~test.multiply`
+
+A reference to the `ISO 8601 standard`_.
+
+.. _ISO 8601 standard: https://xarray.pydata.org
 
 Indices and tables
 ==================
