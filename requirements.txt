@@ -1,2 +1,3 @@
-git+https://github.com/keewis/sphinx.git@integration#egg=sphinx
+sphinx>=3.3
 numpy
+pytest
