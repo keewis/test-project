@@ -53,6 +53,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const exec = require('actions/exec');
             let myOutput = '';
             await exec.exec('date', ['+%Y%m%d-%H%M%S']);
 
