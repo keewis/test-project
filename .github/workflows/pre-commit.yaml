@@ -47,6 +47,18 @@ jobs:
 
       - name: open a PR if there were changes
         if: failure()
-        run: |
-          git status
-          git branch -av
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const exec = require('@actions/exec');
+
+            const options = {};
+            options.listeners = {
+              stdout: (data: Buffer) => {
+                myOutput += data.toString();
+              },
+            }
+            await exec.exec('date', ['+%Y%m%d-%H%M%S'], options);
+
+            await exec.exec('echo', [`${stdout}`]);
