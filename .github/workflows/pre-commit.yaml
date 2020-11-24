@@ -56,11 +56,12 @@ jobs:
             const exec = require('@actions/exec');
 
             const options = {};
+            let myOutput = '';
             options.listeners = {
               stdout: (data: Buffer) => {
                 myOutput += data.toString();
-              },
-            }
+              }
+            };
             await exec.exec('date', ['+%Y%m%d-%H%M%S'], options);
 
             await exec.exec('echo', [`${stdout}`]);
