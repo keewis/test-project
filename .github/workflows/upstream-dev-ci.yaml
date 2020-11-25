@@ -15,6 +15,8 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.8"]
+    outputs:
+      artifacts_availability: ${{ steps.status.outputs.ARTIFACTS_AVAILABLE }}
     steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.6.0
@@ -30,7 +32,9 @@ jobs:
       - name: Run Tests
         run: |
           set -o pipefail
-          python -m pytest -rf | tee output-${{ matrix.python-version }}-log
+          python -m pytest -rf | tee output-${{ matrix.python-version }}-log || (
+              echo "::set-output name=ARTIFACTS_AVAILABLE::true" && false
+          )
 
       - name: Upload artifacts
         if: |
@@ -50,6 +54,7 @@ jobs:
       always()
       && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
       && (github.repository == 'keewis/sphinx-test-project')
+      && (needs.upstream-dev.outputs.artifacts_availability == 'true')
     runs-on: ubuntu-latest
     defaults:
       run:
