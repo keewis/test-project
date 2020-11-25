@@ -34,7 +34,7 @@ jobs:
 
       - name: Upload artifacts
         if: |
-          failure()  # Check the exit code of previous step
+          failure()
           && (github.event_name == 'schedule')
           && (github.repository == 'keewis/sphinx-test-project')
         uses: actions/upload-artifact@v2
