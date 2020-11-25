@@ -49,7 +49,7 @@ jobs:
     if: |
       always()
       && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
-      && (github.repository == 'keewis/sphinx-test-project')"
+      && (github.repository == 'keewis/sphinx-test-project')
     runs-on: ubuntu-latest
     defaults:
       run:
