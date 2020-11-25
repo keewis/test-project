@@ -8,10 +8,12 @@ def error():
     raise RuntimeError("intentional error")
 
 
+@pytest.mark.skip(reason="silence errors")
 def test_error(error):
     pass
 
 
+@pytest.mark.skip(reason="silence errors")
 def test_failing():
     assert False
 
