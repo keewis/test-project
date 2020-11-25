@@ -12,16 +12,19 @@ for file in files:
         print(f"Parsing {file.absolute()}")
         data = fpt.read().split("test summary info")[-1].splitlines()[1:-1]
         data = "\n".join(data)
-        version = file.name.split("-")[1]
+        py_version = file.name.split("-")[1]
+        summary = f"Python {py_version} Test Summary Info"
         message = "\n".join(
-            message,
-            "<details><summary>Python {version} Test Summary Info</summary>",
-            "",
-            "```bash",
-            data,
-            "```",
-            "</details>",
-            "",
+            [
+                message,
+                f"<details><summary>{summary}</summary>",
+                "",
+                "```bash",
+                data,
+                "```",
+                "</details>",
+                "",
+            ]
         )
 
 output_file = pathlib.Path("pytest-logs.txt")
