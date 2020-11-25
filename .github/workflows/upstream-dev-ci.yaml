@@ -51,8 +51,7 @@ jobs:
     name: report
     needs: upstream-dev
     if: |
-      always()
-      && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
       && (github.repository == 'keewis/sphinx-test-project')
       && (needs.upstream-dev.outputs.artifacts_availability == 'true')
     runs-on: ubuntu-latest
