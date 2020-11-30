@@ -51,8 +51,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const moment = require('moment');
-            const date = moment();
+            const moment = require('dateformat');
+            const date = new Date();
             const branch = date.format("[precommit-]YYYYMMDD");
 
             await github.git.createRef({
