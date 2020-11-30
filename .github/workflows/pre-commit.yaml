@@ -45,7 +45,7 @@ jobs:
         run: |
           pre-commit autoupdate
           # make sure to fail if something changed
-          [ -z "$(git diff)" ] && exit 1
+          [ -z "$(git diff)" ] && false
 
       - name: open a PR if there were changes
         if: failure()
