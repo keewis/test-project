@@ -51,12 +51,21 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const moment = require('dateformat');
-            const date = new Date();
-            const branch = date.format("[precommit-]YYYYMMDD");
+            const branch = 'pre-commit';
 
-            await github.git.createRef({
-              ref: `refs/heads/${branch}`,
-              sha: context.sha,
-              ...context.repo
-            });
+            try {
+              await github.repos.getBranch({
+                ...context.repo,
+                branch
+              });
+            } catch(error) {
+              if(error.name === 'HttpError' && error.status === 404) {
+                await github.git.createRef({
+                  ref: `refs/heads/${branch}`,
+                  sha: context.sha,
+                  ...context.repo
+                });
+              } else {
+                throw Error(error)
+              }
+            }
