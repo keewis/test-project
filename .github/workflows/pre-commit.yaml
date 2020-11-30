@@ -2,8 +2,6 @@ name: pre-commit
 
 
 on:
-  push:
-    branches: [master]
   schedule:
     - cron: 0 0 * * *
   workflow_dispatch:  # manually trigger the workflow
@@ -53,8 +51,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const exec = require('actions/exec');
-            let myOutput = '';
-            await exec.exec('date', ['+%Y%m%d-%H%M%S']);
+            let date : Date = new Date();
+            const branch = "precommit-" + date.format("YYYYMMDD");
 
-            await exec.exec('echo', [`${myOutput}`]);
+            await toolkit.git.createRef({
+              ref: `refs/heads/${branch}`,
+              sha: context.sha,
+              ...context.repo
+            });
