@@ -1,0 +1,13 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test toJson
+        run: |
+          echo "${{ toJson(github.event.commits) }}"
