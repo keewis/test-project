@@ -17,7 +17,7 @@ jobs:
         run: |
           git log -n 1 --pretty=format:%s | grep -q "\[skip-ci\]" \
           && echo '::set-output name=CI_TRIGGERED::true' \
-          || echo '::set-output name=CI_TRIGGERED::true'
+          || echo '::set-output name=CI_TRIGGERED::false'
 
   test:
     name: Test
