@@ -5,10 +5,25 @@ on:
       - master
 
 jobs:
+  detect-ci-trigger:
+    name: Detect CI Trigger
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    outputs:
+      triggered: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}
+    steps:
+      - name: detect trigger
+        id: detect_trigger
+        run: |
+          git log -n 1 --pretty=format:%s | grep -q "\[skip-ci\]" \
+          && echo '::set-output name=CI_TRIGGERED::true' \
+          || echo '::set-output name=CI_TRIGGERED::true'
+
   test:
     name: Test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && contains(toJson(github.event.commits), '[skip-ci]') == false
+    needs: detect-ci-trigger
+    if: github.event_name == 'push' && needs.detect-ci-trigger.outputs.triggered == true
     steps:
       - name: Test toJson
         run: |
