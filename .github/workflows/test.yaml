@@ -12,6 +12,7 @@ jobs:
     outputs:
       triggered: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}
     steps:
+      - uses: actions/checkout@v2
       - name: detect trigger
         id: detect_trigger
         run: |
