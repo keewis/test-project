@@ -28,10 +28,10 @@ runs:
       shell: bash
     - name: show commit message
       run: |
-        echo -n "commit message: "
+        echo -n "commit message: '"
         git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }}
-        echo  # ensure there's at least one newline after the commit message
-        echo "searching for ${{ env.INPUT_KEYWORDS }}"
+        echo "'"
+        echo "searching for '${{ env.INPUT_KEYWORDS }}'"
       shell: bash
     - name: detect trigger
       id: detect_trigger
