@@ -51,11 +51,7 @@ jobs:
           fetch-depth: 2
       - uses: ./.github/actions/detect-ci-trigger
         with:
-          keywords:
-            - [skip-ci]
-            - [ci-skip]
-            - [skip ci]
-            - [ci skip]
+          keywords: [skip-ci]
 
   test:
     name: Test
