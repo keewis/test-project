@@ -9,4 +9,6 @@ else
     result="false"
 fi
 
+echo "found trigger: $result"
+
 echo "::set-output name=CI_TRIGGERED::$result"
