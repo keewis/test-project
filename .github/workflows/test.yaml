@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 2
       - name: show commit message
         run: |
-          git log -n 1 --pretty=format:%s ${{ github.ref }}
+          git log -n 1 --pretty=format:%s ${{ github.head_ref }}
       - name: detect trigger
         id: detect_trigger
         run: |
