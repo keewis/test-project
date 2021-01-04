@@ -38,3 +38,4 @@ runs:
     - name: show detection result
       run: |
         echo "trigger detected: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}"
+      shell: bash
