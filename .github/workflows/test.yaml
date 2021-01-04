@@ -60,7 +60,7 @@ jobs:
     needs: detect-ci-trigger
     if: |
       (github.event_name == 'push' || github.event_name == 'pull_request')
-      && needs.detect-ci-trigger.outputs.triggered == 'false'
+      && needs.detect-ci-trigger2.outputs.triggered == 'false'
     steps:
       - name: Test toJson
         run: |
