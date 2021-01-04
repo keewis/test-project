@@ -2,7 +2,7 @@
 ref="$1"
 keywords="$2"
 
-git log -n 1 --pretty=format:%s "$ref" | grep -q "$keywords"
+git log -n 1 --pretty=format:%s "$ref" | grep -qF "$keywords"
 if [[ $? -eq 0 ]]; then
     result="true"
 else
