@@ -36,11 +36,7 @@ runs:
       shell: bash
     - name: detect trigger
       id: detect_trigger
-      run: |
-        git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }} \
-        | grep -q "${{ inputs.keywords }}" \
-        && echo '::set-output name=CI_TRIGGERED::true' \
-        || echo '::set-output name=CI_TRIGGERED::false'
+      run: $GITHUB_ACTION_PATH/script.sh ${{ steps.commit_ref.outputs.REF }} ${{ inputs.keywords }}
       shell: bash
     - name: show detection result
       run: |
