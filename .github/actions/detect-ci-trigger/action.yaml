@@ -3,7 +3,8 @@ description: |
   Detect keywords used to control the CI in the subject line of a commit message
 inputs:
   keywords:
-    description: The keywords to detect
+    description: |
+      The keywords to detect. Currently, only a single keyword is supported.
     required: true
 outputs:
   trigger-found:
