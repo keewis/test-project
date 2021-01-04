@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-ref="$0"
-keywords="$1"
+ref="$1"
+keywords="$2"
 
 git log -n 1 --pretty=format:%s "$ref" | grep -q "$keywords"
 if [[ $? -eq 0 ]]; then
