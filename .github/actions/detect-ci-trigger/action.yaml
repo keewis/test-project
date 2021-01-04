@@ -35,11 +35,11 @@ runs:
         echo "searching for '${{ inputs.keywords }}'"
       shell: bash
     - name: detect trigger
-      id: detect_trigger
+      id: detect-trigger
       run: |
         bash $GITHUB_ACTION_PATH/script.sh ${{ steps.commit_ref.outputs.REF }} ${{ inputs.keywords }}
       shell: bash
     - name: show detection result
       run: |
-        echo "trigger detected: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}"
+        echo "trigger detected: ${{ steps.detect-trigger.outputs.CI_TRIGGERED }}"
       shell: bash
