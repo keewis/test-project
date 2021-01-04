@@ -18,12 +18,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
+      - name: show commit message
+        run: |
+          git log -n 1 --pretty=format:%s ${{ github.ref }}
       - name: detect trigger
         id: detect_trigger
         run: |
           git log -n 1 --pretty=format:%s ${{ github.ref }} | grep -q "\[skip-ci\]" \
           && echo '::set-output name=CI_TRIGGERED::true' \
           || echo '::set-output name=CI_TRIGGERED::false'
+      - name: show detection result
+        run: |
+          echo "trigger detected: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}"
 
   test:
     name: Test
