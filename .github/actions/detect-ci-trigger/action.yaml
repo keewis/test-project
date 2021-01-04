@@ -31,8 +31,7 @@ runs:
         echo -n "commit message: '"
         git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }}
         echo "'"
-        echo "searching for '${{ env.INPUT_KEYWORDS }}'"
-        echo "${{ toJson(env) }}"
+        echo "searching for '${{ inputs.keywords }}'"
       shell: bash
     - name: detect trigger
       id: detect_trigger
