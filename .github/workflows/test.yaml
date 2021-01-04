@@ -52,8 +52,7 @@ jobs:
       - uses: ./.github/actions/detect-ci-trigger
         id: detect-trigger
         with:
-          keywords:
-            - "[skip-ci]"
+          keywords: "[skip-ci]"
 
   test:
     name: Test
