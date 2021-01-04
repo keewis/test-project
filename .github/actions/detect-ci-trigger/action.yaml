@@ -14,9 +14,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 2
     - name: determine the commit hash
       id: commit_ref
       run: |
