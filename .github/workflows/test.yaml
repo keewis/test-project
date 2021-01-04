@@ -9,37 +9,6 @@ on:
 
 jobs:
   detect-ci-trigger:
-    name: Detect CI Trigger
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
-    outputs:
-      triggered: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-      - name: determine the commit hash
-        id: commit_ref
-        run: |
-          if [[ ${{ github.event_name }} == 'pull_request' ]]; then
-            echo '::set-output name=REF::HEAD^2'
-          else
-            echo '::set-output name=REF::HEAD'
-          fi
-      - name: show commit message
-        run: |
-          git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }}
-      - name: detect trigger
-        id: detect_trigger
-        run: |
-          git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }} | grep -q "\[skip-ci\]" \
-          && echo '::set-output name=CI_TRIGGERED::true' \
-          || echo '::set-output name=CI_TRIGGERED::false'
-      - name: show detection result
-        run: |
-          echo "trigger detected: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}"
-
-  detect-ci-trigger2:
     name: Detect CI Trigger using a action
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'pull_request'
@@ -60,7 +29,7 @@ jobs:
     needs: detect-ci-trigger
     if: |
       (github.event_name == 'push' || github.event_name == 'pull_request')
-      && needs.detect-ci-trigger2.outputs.triggered == 'false'
+      && needs.detect-ci-trigger.outputs.triggered == 'false'
     steps:
       - name: Test toJson
         run: |
