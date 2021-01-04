@@ -1,0 +1,43 @@
+name: Detect CI Trigger
+description: |
+  Detect keywords used to control the CI in the subject line of a commit message
+inputs:
+  keywords:
+    description: The keywords to detect
+    required: true
+outputs:
+  trigger-found:
+    description: |
+      true if any of the keywords has been found in the subject line of the commit
+      message
+    value: ${{ steps.detect-trigger.outputs.CI_TRIGGERED }}
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - name: determine the commit hash
+      id: commit_ref
+      run: |
+        if [[ ${{ github.event_name }} == 'pull_request' ]]; then
+          echo '::set-output name=REF::HEAD^2'
+        else
+          echo '::set-output name=REF::HEAD'
+        fi
+      shell: bash
+    - name: show commit message
+      run: |
+        git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }}
+      shell: bash
+    - name: detect trigger
+      id: detect_trigger
+      run: |
+        git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }} \
+        | grep -q "${{ env.INPUT_KEYWORDS }}" \
+        && echo '::set-output name=CI_TRIGGERED::true' \
+        || echo '::set-output name=CI_TRIGGERED::false'
+      shell: bash
+    - name: show detection result
+      run: |
+        echo "trigger detected: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}"

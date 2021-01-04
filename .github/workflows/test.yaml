@@ -39,6 +39,15 @@ jobs:
         run: |
           echo "trigger detected: ${{ steps.detect_trigger.outputs.CI_TRIGGERED }}"
 
+  detect-ci-trigger2:
+    name: Detect CI Trigger using a action
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    outputs:
+      triggered: ${{ steps.detect-trigger.outputs.trigger-found }}
+    steps:
+      - uses: ./.github/actions/detect-ci-trigger
+
   test:
     name: Test
     runs-on: ubuntu-latest
