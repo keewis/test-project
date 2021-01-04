@@ -37,7 +37,7 @@ runs:
       id: detect_trigger
       run: |
         git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }} \
-        | grep -q "${{ env.INPUT_KEYWORDS }}" \
+        | grep -q "${{ inputs.keywords }}" \
         && echo '::set-output name=CI_TRIGGERED::true' \
         || echo '::set-output name=CI_TRIGGERED::false'
       shell: bash
