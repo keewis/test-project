@@ -36,7 +36,8 @@ runs:
       shell: bash
     - name: detect trigger
       id: detect_trigger
-      run: $GITHUB_ACTION_PATH/script.sh ${{ steps.commit_ref.outputs.REF }} ${{ inputs.keywords }}
+      run: |
+        bash $GITHUB_ACTION_PATH/script.sh ${{ steps.commit_ref.outputs.REF }} ${{ inputs.keywords }}
       shell: bash
     - name: show detection result
       run: |
