@@ -23,6 +23,9 @@ runs:
           echo '::set-output name=REF::HEAD'
         fi
       shell: bash
+    - name: fetch a sufficient number of commits
+      run: git fetch --depth 2
+      shell: bash
     - name: show commit message
       run: |
         git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }}
