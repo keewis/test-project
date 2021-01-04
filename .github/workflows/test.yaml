@@ -20,11 +20,11 @@ jobs:
           fetch-depth: 2
       - name: show commit message
         run: |
-          git log -n 1 --pretty=format:%s ${{ github.sha }}
+          git log -n 1 --pretty=format:%s HEAD^2
       - name: detect trigger
         id: detect_trigger
         run: |
-          git log -n 1 --pretty=format:%s ${{ github.ref }} | grep -q "\[skip-ci\]" \
+          git log -n 1 --pretty=format:%s HEAD^2 | grep -q "\[skip-ci\]" \
           && echo '::set-output name=CI_TRIGGERED::true' \
           || echo '::set-output name=CI_TRIGGERED::false'
       - name: show detection result
