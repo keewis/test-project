@@ -29,6 +29,7 @@ runs:
     - name: show commit message
       run: |
         git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }}
+        echo "searching for ${{ env.INPUT_KEYWORDS }}"
       shell: bash
     - name: detect trigger
       id: detect_trigger
