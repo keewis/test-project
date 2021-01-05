@@ -2,10 +2,11 @@
 event_name="$1"
 keywords="$2"
 
-echo "::group name=fetching a sufficient number of commits"
+echo "::group::fetching a sufficient number of commits"
 git fetch --depth 2
+echo "::endgroup::"
 
-echo "::group name=extracting the commit message"
+echo "::group::extracting the commit message"
 if [[ "$event_name" == "pull_request" ]]; then
     ref="HEAD^2"
 else
@@ -19,8 +20,9 @@ if [[ $(echo $commit_message | wc -l) -le 1 ]]; then
 else
     echo -e "commit message:\n--- start ---\n$commit_message\n--- end ---"
 fi
+echo "::endgroup::"
 
-echo "::group name=scanning for keywords"
+echo "::group::scanning for keywords"
 echo "searching for: '$keywords'"
 if echo "$commit_message" | grep -qF "$keywords"; then
     result="true"
@@ -28,5 +30,6 @@ else
     result="false"
 fi
 echo "keywords detected: $result"
+echo "::endgroup::"
 
 echo "::set-output name=CI_TRIGGERED::$result"
