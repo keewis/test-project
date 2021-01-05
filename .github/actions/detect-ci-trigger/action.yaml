@@ -23,6 +23,7 @@ runs:
     - name: show detection result
       run: |
         echo "::group::final summary"
+        echo "commit message: ${{ steps.detect-trigger.outputs.COMMIT_MESSAGE }}"
         echo "trigger keyword: ${{ inputs.keywords }}"
         echo "trigger found: ${{ steps.detect-trigger.outputs.CI_TRIGGERED }}"
         echo "::endgroup::"

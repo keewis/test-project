@@ -29,4 +29,5 @@ fi
 echo "keywords detected: $result"
 echo "::endgroup::"
 
+echo "::set-output name=COMMIT_MESSAGE::$commit_message"
 echo "::set-output name=CI_TRIGGERED::$result"
