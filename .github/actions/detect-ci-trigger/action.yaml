@@ -15,6 +15,9 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: fetch a sufficient number of commits
+      run: git fetch --depth 2
+      shell: bash
     - name: detect trigger
       id: detect-trigger
       run: |

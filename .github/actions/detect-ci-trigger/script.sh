@@ -2,12 +2,6 @@
 event_name="$1"
 keywords="$2"
 
-echo "::group::fetching a sufficient number of commits"
-git fetch --depth 10 2>&1
-git status 2>&1
-git log -n 3 2>&1
-echo "::endgroup::"
-
 echo "::group::extracting the commit message"
 echo "event name: $event_name"
 if [[ "$event_name" == "pull_request" ]]; then
