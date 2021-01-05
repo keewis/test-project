@@ -22,5 +22,8 @@ runs:
       shell: bash
     - name: show detection result
       run: |
-        echo "trigger detected: ${{ steps.detect-trigger.outputs.CI_TRIGGERED }}"
+        echo "::group::final summary"
+        echo "trigger keyword: ${{ inputs.keywords }}"
+        echo "trigger found: ${{ steps.detect-trigger.outputs.CI_TRIGGERED }}"
+        echo "::endgroup::"
       shell: bash
