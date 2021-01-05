@@ -4,9 +4,11 @@ keywords="$2"
 
 echo "::group::fetching a sufficient number of commits"
 git fetch --depth 2
+git log -n 3
 echo "::endgroup::"
 
 echo "::group::extracting the commit message"
+echo "event name: $event_name"
 if [[ "$event_name" == "pull_request" ]]; then
     ref="HEAD^2"
 else
