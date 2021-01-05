@@ -1,12 +1,31 @@
 #!/usr/bin/env bash
-ref="$1"
+event_name="$1"
 keywords="$2"
 
-git log -n 1 --pretty=format:%s "$ref" | grep -qF "$keywords"
-if [[ $? -eq 0 ]]; then
+echo "::group fetching a sufficient number of commits"
+git fetch --depth 2
+
+echo "::group extracting the commit message"
+if [[ "$event_name" == "pull_request" ]]; then
+    ref="HEAD^2"
+else
+    ref="HEAD"
+fi
+
+commit_message="$(git log -n 1 --pretty=format:%s "$ref")"
+
+if [[ $(echo $commit_message | wc -l) -le 1 ]]; then
+    echo "commit message: '$commit_message'"
+else
+    echo -e "commit message:\n--- start ---\n$commit_message\n--- end ---"
+fi
+
+echo "::group searching for: '$keywords'"
+if echo "$commit_message" | grep -qF "$keywords"; then
     result="true"
 else
     result="false"
 fi
+echo "trigger detected: $result"
 
 echo "::set-output name=CI_TRIGGERED::$result"

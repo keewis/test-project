@@ -15,29 +15,13 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: determine the commit hash
-      id: commit_ref
-      run: |
-        if [[ ${{ github.event_name }} == 'pull_request' ]]; then
-          echo '::set-output name=REF::HEAD^2'
-        else
-          echo '::set-output name=REF::HEAD'
-        fi
-      shell: bash
     - name: fetch a sufficient number of commits
       run: git fetch --depth 2
-      shell: bash
-    - name: show commit message
-      run: |
-        echo -n "commit message: '"
-        git log -n 1 --pretty=format:%s ${{ steps.commit_ref.outputs.REF }}
-        echo "'"
-        echo "searching for '${{ inputs.keywords }}'"
       shell: bash
     - name: detect trigger
       id: detect-trigger
       run: |
-        bash $GITHUB_ACTION_PATH/script.sh ${{ steps.commit_ref.outputs.REF }} ${{ inputs.keywords }}
+        bash $GITHUB_ACTION_PATH/script.sh ${{ github.event_name }} ${{ inputs.keywords }}
       shell: bash
     - name: show detection result
       run: |
