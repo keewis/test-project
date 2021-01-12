@@ -19,15 +19,20 @@ jobs:
       - uses: ./.github/actions/detect-ci-trigger
         id: detect-trigger
         with:
-          keywords: "[skip-ci]"
+          keywords: "[test-upstream]"
 
   test:
     name: Test
     runs-on: ubuntu-latest
     needs: detect-ci-trigger
     if: |
-      (github.event_name == 'push' || github.event_name == 'pull_request')
-      && needs.detect-ci-trigger.outputs.triggered == 'false'
+      always()
+      && github.repository == 'keewis/sphinx-test-project'
+      && (
+          github.event_name == 'scheduled'
+          || github.event_name == 'workflow_dispatch'
+          || needs.detect-ci-trigger.outputs.triggered == 'true'
+      )
     steps:
       - name: Test toJson
         run: |
