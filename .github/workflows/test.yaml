@@ -33,7 +33,6 @@ jobs:
       && github.repository == 'keewis/sphinx-test-project'
       && (
         github.event_name == 'scheduled'
-        || github.event_name == 'workflow_dispatch'
       )
     steps:
       - name: Test toJson
