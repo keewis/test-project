@@ -51,7 +51,7 @@ jobs:
       - uses: keewis/ci-trigger@main
         id: detect-trigger
         with:
-          keywords: "[skip-ci]"
+          keyword: "[skip-ci]"
 
   test-action:
     name: Test the external action
