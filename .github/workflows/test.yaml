@@ -40,3 +40,34 @@ jobs:
       - name: Test toJson
         run: |
           echo "${{ toJson(github.event.commits) }}"
+
+  detect-ci-trigger-action:
+    name: Detect CI Trigger using a external action
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    outputs:
+      triggered: ${{ steps.detect-trigger.outputs.trigger-found }}
+    steps:
+      - uses: keewis/ci-trigger@main
+        id: detect-trigger
+        with:
+          keywords: "[skip-ci]"
+
+  test-action:
+    name: Test the external action
+    runs-on: ubuntu-latest
+    needs: detect-ci-trigger-action
+    if: |
+      always()
+      && github.repository == 'keewis/sphinx-test-project'
+      && (
+        github.event_name == 'schedule'
+        || github.event_name == 'workflow_dispatch'
+        || needs.detect-ci-trigger-action.outputs.triggered == 'false'
+      )
+    steps:
+      - name: run something
+        run: |
+          echo "::group::Group"
+          echo "test output"
+          echo "::endgroup::"
