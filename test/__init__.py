@@ -1,5 +1,5 @@
-from typing import TypeVar, Dict, DefaultDict
 from importlib.metadata import version
+from typing import DefaultDict, Dict, TypeVar
 
 import numpy as np
 
@@ -37,6 +37,11 @@ def multiply(
     save_format : {"ma{icious", "options", \
                    "that need a line break"}, default: "options"
         file format
+
+        - "ma{icious": malicious option
+        - "options": fill value
+        - "that need a line break": long option that spans multiple lines, even in the
+          description
     test : optional
         optional parameter that does absolutely nothing
     **variable_kwargs
@@ -49,7 +54,7 @@ def multiply(
 
 
 def func(x, y, *args, **kwargs):
-    """ test function
+    """test function
 
     Parameters
     ----------
@@ -67,7 +72,7 @@ def func(x, y, *args, **kwargs):
 
 
 def func2(x, y):
-    """ second test function
+    """second test function
 
     Parameters
     ----------
@@ -100,7 +105,7 @@ def func2(x, y):
 
 class MyClass:
     def method1(self, x):
-        """ first test method
+        """first test method
 
         Parameters
         ----------
@@ -114,7 +119,7 @@ class MyClass:
         return x
 
     def method2(self, y):
-        """ second test method
+        """second test method
 
         Parameters
         ----------
@@ -150,7 +155,7 @@ def lock(timeout, requested_key) -> str:
     """
 
 
-def dump_model(self, num_iteration=None, start_iteration=0, importance_type='split'):
+def dump_model(self, num_iteration=None, start_iteration=0, importance_type="split"):
     """Dump Booster to JSON format.
 
     Parameters
