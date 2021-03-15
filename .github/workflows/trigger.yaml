@@ -1,0 +1,24 @@
+name: Trigger test
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  trigger:
+    name: Detect Trigger
+    runs-on: ubuntu-latest
+    outputs:
+      triggered: ${{ steps.detect-trigger.outputs.trigger-found }}
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - uses: xarray-contrib/ci-trigger@52a1867
+      id: detect-trigger
+      with:
+        keyword: "[skip-ci]"
