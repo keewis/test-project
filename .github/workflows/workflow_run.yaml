@@ -1,0 +1,15 @@
+name: workflow run
+on:
+  workflow_run:
+    workflows:
+      - Run
+    types:
+      - completed
+
+jobs:
+  test:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - name: useless run 2
+      run: env
