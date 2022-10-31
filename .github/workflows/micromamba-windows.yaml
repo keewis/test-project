@@ -12,5 +12,7 @@ jobs:
         shell: bash -l {0}
     steps:
     - uses: mamba-org/provision-with-micromamba@v14
+      with:
+        environment-file: false
     - run: |
         conda info -a
