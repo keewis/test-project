@@ -1,0 +1,16 @@
+name: "micromamba-on-windows without conda"
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+    - uses: mamba-org/provision-with-micromamba@v14
+    - run: |
+        conda info -a
