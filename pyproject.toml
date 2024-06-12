@@ -1,5 +1,19 @@
+[project]
+name = "test-project"
+license = {text = "MIT"}
+maintainer = "test"
+maintainer_email = "keewis@posteo.de"
+description = "sphinx test project"
+requires-python = ">=3.10"
+
+[project.urls]
+homepage = "https://github.com/keewis/test-project"
+
 [build-system]
 requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["test"]
 
 [tool.setuptools_scm]
